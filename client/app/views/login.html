@@ -1,0 +1,69 @@
+<div class=" col-md-12 page-login" ng-controller="LoginPartCtrl">
+<div class="login col-md-6 ">
+ <h2>Login</h2>
+ <div ng-If="err">
+     <p>Username or Password is incorrect</p>
+ </div>
+    <form name="formlogin" ng-submit="login()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.loginemail.$dirty && form.loginemail.$error.required }">
+            <label for="loginemail">Email</label>
+            <input type="loginemail" name="loginemail" id="loginemail" class="form-control" ng-model="vm.loginemail" required />
+            <span ng-show="form.loginemail.$dirty && form.loginemail.$error.required" class="help-block">Email is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.loginpassword.$dirty && form.loginpassword.$error.required }">
+            <label for="loginpassword">Password</label>
+            <input type="password" name="loginpassword" id="loginpassword" class="form-control" ng-model="vm.loginpassword" required />
+            <span ng-show="form.loginpassword.$dirty && form.loginpassword.$error.required" class="help-block">Password is required</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="formlogin.$invalid || vm.dataLoading" class="btn btn-primary">Login</button>
+            <img ng-if="vm.dataLoading" src="data:image/gif" />
+             
+        </div>
+    </form>
+   <!-- {{token[0]['variables']['fname']}} -->
+   <div ng-If="loo">
+    
+      <div ng-If="loofunction(token[0]['success'],token[0]['variables']['fname'])"></div>
+   </div>
+  
+    
+</div>
+<div class="signup col-md-6 ">
+    <h2>Signup</h2>
+    <form name="form" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.fname.$dirty && form.fname.$error.required }">
+            <label for="fname">First name</label>
+            <input type="text" name="fname" id="fname" class="form-control" ng-model="vm.user.fname" required />
+            <span ng-show="form.fname.$dirty && form.fname.$error.required" class="help-block">First name is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.lname.$dirty && form.lname.$error.required }">
+            <label for="lname">Last name</label>
+            <input type="text" name="lname" id="lname" class="form-control" ng-model="vm.user.lname" required />
+            <span ng-show="form.lname.$dirty && form.lname.$error.required" class="help-block">Last name is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.phone.$dirty && form.phone.$error.required }">
+            <label for="phone">Phone number</label>
+            <input type="text" name="phone" id="phone" class="form-control" ng-model="vm.user.phone" required />
+            <span ng-show="form.phone.$dirty && form.phone.$error.required" class="help-block">Phone number is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" class="form-control" ng-model="vm.user.email" required />
+            <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" ng-model="vm.user.password" required />
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-click="register()"ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Register</button>
+            <img ng-if="vm.dataLoading" src="../img/loading.gif" />
+            
+        </div>
+    </form>
+    <p>OR</p>
+		<button ng-click="asguest()" class="btn btn-link guestlink">Continue as Guest.</button>
+</div>
+</div>

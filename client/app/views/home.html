@@ -1,0 +1,61 @@
+<div ng-show="loading" class="loading-spiner-holder ng-hide" data-loading ><div class="loading-spiner"><img src="img/loading.gif" /></div></div>
+
+
+
+  <div class="banner">
+            <img src="img/cover.jpg">
+            <h1>we strive to serve you with best </br>ASIAN food</br> experience.</h1>
+    </div><!-- /.banner -->
+<div ng-controller="HomeCtrl">
+
+ <div class="find-location" >
+    <label class="item-input-wrapper">
+      <i class="location-icon"></i>
+      <input type="text" id="Autocomplete" class="form-control"  placeholder="Enter your delivery address." ng-autocomplete ng-model="result" ng-change="change()" options="options" details="details"/> 
+   
+    <!-- {{returned}}  -->
+
+<!-- {{returnedvalue.name[0]}} -->
+   </label>
+   <table>
+<tr >
+  <td ng-If="latvar(details.geometry.location.lat(),details.geometry.location.lng())">
+   
+  </td>
+
+</tr>
+</table>
+
+        <!-- <div class="returnlist" ng-repeat="returnvalue in returnvalues" >
+        <ul>
+         <li>{{returnvalue.name}}</li>
+          </ul>
+        </div> -->
+    </div><!-- /.find-location-->
+
+
+     <div class="how col-md-12 col-xs-12 col-lg-12">
+     <p>how we work</p>
+      <div class="col-md-4 next-arrow">
+      <p>1</p>
+        <img src="img/step1.png">
+        <p>www.eatenough.com</br>
+          Enter your delivery address.</p>
+      </div>
+       <div class="col-md-4 next-arrow">
+       <p>2</p>
+        <img src="img/step2.png">
+        <p>Select Restaurant</br>
+          and Place order</p>
+      </div>
+       <div class="col-md-4">
+       <p>3</p>
+        <img src="img/step3.png">
+        <p>Recieve your food in</br>
+             your door.</p>
+      </div>     
+  </div>
+
+</div>
+
+	

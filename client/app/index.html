@@ -1,0 +1,323 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <!-- endbuild -->
+    <!-- googlemap api -->
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places" async defer></script>
+    <!-- <script src="http://code.angularjs.org/1.2.4/angular-route.js"></script> -->
+
+    <!-- map and load styles -->
+    <style type="text/css">
+#list-to-fix{
+  position: relative;
+}
+#page {
+    display: none;
+}
+#loading {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(192, 192, 192, 0.5);
+    background-image: url("http://i.stack.imgur.com/MnyxU.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.fix{
+  background: #fff;
+    z-index: 99;
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+  #map {
+    width: 100%;
+    height: 400px;
+}
+.controls {
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+#searchInput {
+   
+    
+}
+#searchInput:focus {
+    border-color: #4d90fe;
+}
+.navbar-default .navbar-nav>.active>a{
+  background-color: transparent;
+}
+</style>
+
+<!-- script for load and map -->
+<script>
+
+// function onReady(callback) {
+//     var intervalID = window.setInterval(checkReady, 1000);
+
+//     function checkReady() {
+//         if (document.getElementsByTagName('body')[0] !== undefined) {
+//             window.clearInterval(intervalID);
+//             callback.call(this);
+//         }
+//     }
+// }
+
+// function show(id, value) {
+//     document.getElementById(id).style.display = value ? 'block' : 'none';
+// }
+
+// onReady(function () {
+//     show('page', true);
+//     show('loading', false);
+// });
+
+        
+
+// function initMap() {
+   
+//     var input = document.getElementById('searchInput');
+
+//     var autocomplete = new google.maps.places.Autocomplete(input);
+   
+   
+   
+
+//     autocomplete.addListener('place_changed', function() {
+//        var place =autocomplete.getPlace();
+//        console.log(place);
+//        console.log(autocomplete.getPlace().formatted_address);
+
+//     if (place) {
+//            var latvariable= place.geometry.location.lat();
+//            var longvariable= place.geometry.location.lng();
+//            alert (latvariable+"\nlong:"
+//             + longvariable);
+//            var address1 =autocomplete.getPlace().formatted_address;
+           
+//           var address2 = "1009 Liberty St, El Cerrito, CA 94530, USA";
+
+
+//            directionsService = new google.maps.DirectionsService();
+         
+           
+//             var request = {
+//                origin:address1,
+//                destination:address2,
+//                travelMode: google.maps.DirectionsTravelMode.DRIVING
+//             };
+//             directionsService.route(request, function(response, status)
+//             {
+//                if (status == google.maps.DirectionsStatus.OK)
+//                {
+           
+//                   distance = "The distance between the two points on the chosen route is: "+response.routes[0].legs[0].distance.text;
+//                   distance += "The aproximative driving time is: "+response.routes[0].legs[0].duration.text;
+//                   document.getElementById("distance_road").innerHTML = distance;
+//                }
+//             });
+
+
+//         }
+//     else{
+//       alert("not a lat");
+//     }
+//   });
+//   }
+  </script>
+
+  </head>
+  <body ng-app="clientApp" ng-cloak>
+  
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <header class="wrap" id="wrap">
+     <nav class="navbar navbar-default">
+        <div class="container-fluid"  ng-controller="indexCtrl">
+         <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="navbar-header">     
+            <a class="navbar-brand" href="#"><img class="logo" src="img/logo.png"></a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+            <li class="delivery-address" ng-if="addressValue()" ng-model="addressValue"> Delivery Address: </br>{{addressValue()}}</li>
+              <li><a ng-href="#/about">About Us</a></li>
+               
+              <li ng-If="isuserset()" ><a href="#/login">Login</a></li>
+              <li  ng-If="isuserset()"><a href="#/login">Signup</a></li>
+           
+              <li ng-If="!isuserset()"  class="profile"><span class="username">{{userinfo}}</span>
+            
+
+
+              <md-menu md-offset="0 -7" >
+          <md-button aria-label="My profile" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+            <md-icon md-menu-origin class="account-icon"></md-icon>
+          </md-button>
+          <md-menu-content width="6" class="profile-dropdown">
+            <md-menu-item >
+              <md-button ng-click="myAccountClick()"> <span md-menu-align-target></span> My account </md-button>
+              </md-menu-item>
+              <md-menu-item>
+              <md-button ng-click="logOutClick()"> <span md-menu-align-target></span> Logout </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+
+</li>
+
+
+              <li class="dropdown">
+          
+              <!-- <ngcart-summary></ngcart-summary> -->
+                <!-- <a href="#" class="dropdown-toggle cart" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="cartimg"><img src="img/cart.png"></span>0</a>              -->
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+    </header>
+
+  
+   
+
+    <div ng-view=" "></div>
+
+  
+
+      
+    
+        
+    <div class="footer">
+      <div class="container-fluid">
+        <div class="col-xs-12 col-md-4">
+          <h2>Get to know us</h2>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Carrers</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>  
+        <div class="col-xs-12 col-md-4">
+          <h2>Let us help you</h2>
+          <ul>
+            <li><a href="#">Accound details</a></li>
+            <li><a href="#">Order History</a></li>
+          </ul>            
+        </div>  
+        <div class="col-xs-12 col-md-4">
+          <h2>Doing busisness</h2>
+           <ul>
+            <li><a href="#">Catering and Large Orders</a></li>
+            <li><a href="#">Become a Partner Restaurant</a></li>
+           </ul>            
+        </div> 
+        <div class="col-xs-12 col-md-5 footer-details">
+          <img src="img/logo.png">
+          <ul >
+            <li>Term of service</li>
+            <li>Privacy</li>
+            <li>Site map</li>
+            <li>© 2016 Eat Enough</li>
+            </ul>
+        </div> <!-- /.footer-details-->    
+      </div><!-- /.contianer -->
+    </div><!-- /.footer -->
+
+     
+    
+      
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/ngCart/dist/ngCart.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+     <script src="bower_components/restangular/dist/restangular.js"></script>
+    <script src="bower_components/autocomplete/ngAutocomplete.js"></script>
+        <!-- <script src="bower_components/ng-cart/dist/ngCart.js"></script> -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/home.js"></script>
+        <script src="scripts/controllers/index.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/movies.js"></script>
+        <script src="scripts/controllers/restaurants.js"></script>
+        <script src="scripts/controllers/restaurantdetails.js"></script>
+        <!-- endbuild -->
+         <script src="scripts/controllers/cartcheck.js"></script>
+                  <script src="scripts/controllers/loginpart.js"></script>
+                  <script src="scripts/controllers/summary.js"></script>
+
+                <!-- Angular Material requires Angular.js Libraries -->
+        <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script> -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+
+
+        <!-- Angular Material Library -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+
+
+
+</body>
+</html>

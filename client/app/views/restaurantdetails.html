@@ -1,0 +1,113 @@
+<div ng-show="loading" class="loading-spiner-holder ng-hide" data-loading ><div class="loading-spiner"><img src="img/loading.gif" /></div></div>
+
+
+<div class="container-fluid content-area" ng-controller="RestaurantdetailsCtrl" >
+
+    <div class="restaurantinfo col-md-8">
+    <img src="img/Creasian Taste of the Himalayas/creasian_banner.jpg">
+      <div class="detailedinfo col-xs-12 col-md-11 col-xl-11">
+        <img src="img/logo2nd.jpg">
+        <h1>{{dats}}</h1>
+         <h3> <span>&#9734;</span>
+          <span>&#9734;</span>
+          <span>&#9734;</span>
+          <span>&#9734;</span>
+          <span>&#9734;</span>
+          </h3>
+          <h2>Delivery Time : 50 mins</h2>
+      </div>
+    </div>
+
+   
+
+  <div class="col-xs-12 col-md-7 col-xl-7 ">
+    <div set-class-when-at-top="fix-to-top" class="courseselect"  >
+    <h2>Courses</h2>
+    <select name="category-group" id="categoryGroup" class="form-control selectcourses" ng-model="itemSelected" ng-change="onCategoryChange(itemSelected)">
+    <!-- <option value="0" selected="0">Select a category...</option> -->
+    <option ng-repeat="course in RestaurantCourse" value="{{course.courseName| removeSpaces}}"
+   ng-if="course.courseName">
+                                                    {{course.courseName}}
+    </option>
+    </select>
+    </div>
+    <!-- <md-content >
+      <md-tabs md-dynamic-height="" md-border-bottom="">
+        <md-tab set-class-when-at-top="fix-to-top" ng-repeat="course in RestaurantCourse" label={{course.courseName}} ng-If="course.courseName" >
+          <md-content class="md-padding" ng-If="coursedetail(course.courseName)">
+           <div ng-repeat="menuitem in restaurantmenu">
+             <div ng-If="coursecheck(menuitem.menuTitle)">
+               <span ng-repeat="menuitemdetails in menuitem.menuItem">
+                 
+                   
+                    <div class="dishes-list col-xs-12 col-md-12 col-xl-12 "  >
+                    
+                      <h1>{{menuitemdetails.itemName}} <span class="price">${{menuitemdetails.price}}</span></h1>
+                      
+                      <div class="left-attr col-xs-12 col-md-5">
+                        <img src="{{menuitemdetails.imageUrl}}">
+                        
+                      </div>
+                        <div class="right-attr col-xs-12 col-md-7">
+                           <p class="col-xs-12">{{menuitemdetails.description}}
+                           </p>
+                           <p class="spice col-xs-12">Select spice level :</p>
+                           <span class="mild col-xs-4 col-md-4 col-xs-4">mild</span> <span class="medium col-xs-4 col-md-4 col-xs-4">medium</span><span class="spicy col-xs-4 col-md-4 col-xs-4">spicy</span> <input id="slider1" type="range" min="0" max="200" step="100" value="0" /> 
+                            <h1>Quantity :</h1>
+                            
+                            
+                            <ngcart-addtocart id="{{ menuitemdetails.itemName }}" name="{{ menuitemdetails.itemName }}" price="{{ menuitemdetails.price }}" quantity="1" quantity-max="30" data="item" >OrderNow</ngcart-addtocart>
+                        </div>
+                      </div>
+                    </span>
+                  </div>
+               </div>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-content> -->
+    <div class="course" ng-repeat="course in RestaurantCourse" ng-if="course.courseName">
+    <h1 class="coursename" id="{{course.courseName| removeSpaces}}">{{course.courseName}}</h1>
+    <div ng-If="coursedetail(course.courseName)">
+      <div ng-repeat="menuitem in restaurantmenu">
+             <div ng-If="coursecheck(menuitem.menuTitle)">
+               <span ng-repeat="menuitemdetails in menuitem.menuItem">
+                 
+                   
+                    <div class="dishes-list col-xs-12 col-md-12 col-xl-12 "  >
+                    
+                      <h1>{{menuitemdetails.itemName}} <span class="price">${{menuitemdetails.price}}</span></h1>
+                      
+                      <div class="left-attr col-xs-12 col-md-5">
+                        <img src="{{menuitemdetails.imageUrl}}">
+                        
+                      </div>
+                        <div class="right-attr col-xs-12 col-md-7">
+                           <p class="col-xs-12">{{menuitemdetails.description}}
+                           </p>
+                           <p class="spice col-xs-12">Select spice level :</p>
+                           <span class="mild col-xs-4 col-md-4 col-xs-4">mild</span> <span class="medium col-xs-4 col-md-4 col-xs-4">medium</span><span class="spicy col-xs-4 col-md-4 col-xs-4">spicy</span> <input id="slider1" type="range" min="0" max="200" step="100" value="0" /> 
+                            <h1>Quantity :</h1>
+                            
+                            
+                            <ngcart-addtocart id="{{ menuitemdetails.itemName }}" name="{{ menuitemdetails.itemName }}" price="{{ menuitemdetails.price }}" quantity="1" quantity-max="30" data="item" >OrderNow</ngcart-addtocart>
+                        </div>
+                      </div>
+                    </span>
+                  </div>
+               </div>
+
+    </div>
+    </div>
+
+  </div>
+  <div class="fixed-content col-xs-12 col-md-5 col-xl-5" class="md-padding dialogdemoBasicUsage" id="popupContainer" ng-cloak="">
+   
+          <ngcart-cart></ngcart-cart>
+            <!-- <ngcart-checkout></ngcart-checkout> -->
+        
+
+
+  </div>
+</div>
+

@@ -1,0 +1,383 @@
+
+<div class="loading-spiner-holder ng-hide" data-loading ng-show="loading"><div class="loading-spiner"><img src="img/loading.gif" /></div></div>
+
+
+<div class="container-fluid content-area"  ng-controller="RestaurantsCtrl" >
+
+<div ng-If="prop(restaurants[0].name)">
+
+  <div ng-If="proptopcheck()">
+  
+    <!-- <p>this is true</p> -->
+  
+    <!-- {{restaurant.name}}{{restaurant.state}} -->
+         <!--  <ul ng-repeat="detail in restaurant.menuItem">
+            <li>{{detail.price}}</li>
+            <li>{{detail.description}}</li>
+          </ul> -->
+  
+        <!-- {{restaurants | json}} -->
+        <!-- <ul ng-repeat="restaurant in restaurants"> -->
+        	<!-- <li ng-show="restaurant.state">{{restaurant.name}}{{restaurant.state}} -->
+         <!--  <ul ng-repeat="detail in restaurant.menuItem">
+            <li>{{detail.price}}</li>
+            <li>{{detail.description}}</li>
+          </ul> -->
+          <!-- </li> -->
+        <!-- </ul> -->
+<div ng-cloak="" class="tabsdemoDynamicHeight">
+  <md-content>
+    <md-tabs md-dynamic-height="" md-border-bottom="">
+      <md-tab label="Restaurants">
+        <md-content class="md-padding">
+        <h2> Nepalese</h2>
+          <div class="resturant-list col-xs-12 col-md-4 col-xl-3" ng-repeat="restaurant in restaurants" ng-If="restaurant.state">
+                <div ng-click="restaurantdetailname(restaurant.name)">
+                      <img src="{{restaurant.banner}}" class="background-frame">
+                      <div class="detail-block">
+                        <img src="{{restaurant.logo}}">
+                        <div class="ratings">
+                          <span ng-repeat="i in getNumber(restaurant.rating)  track by $index">&#9734;</span>
+                          <!-- <span>&#9734;</span>
+                          <span>&#9734;</span>
+                          <span>&#9734;</span>
+                          <span>&#9734;</span> -->
+                        </div>
+                        <h2 ng-model="restaurantname">{{restaurant.name}}</h2>
+                        <h2>4.99 miles | {{restaurant.delivery_time}} - {{restaurant.delivery_time+10}} mins</h2>
+                      </div>
+                  </div>
+                    </div>
+        </md-content>
+      </md-tab>
+      <md-tab label="Ratings">
+        <md-content class="md-padding">
+              
+          <div ng-repeat="restaurant in restaurants" ng-If="restaurant.state && restaurant.rating===5">
+            <div ng-If="checkrating(restaurant.rating)" class="list-cat col-xs-12">
+                          <h2 > 5 </h2>  
+                    <span>&#9734;</span>
+                      <span>&#9734;</span>
+                      <span>&#9734;</span>
+                      <span>&#9734;</span>  
+                           
+                  </div>
+                  <div class="resturant-list col-xs-12 col-md-4 col-xl-3">
+                    <img src="{{restaurant.banner}}" class="background-frame">
+                    <div class="detail-block">
+                      <img src="{{restaurant.logo}}">
+                      <div class="ratings">
+                     <span ng-repeat="i in getNumber(restaurant.rating)  track by $index">&#9734;</span>
+
+                      </div>
+                        <h2>{{restaurant.name}}</h2>
+                        <h2>4.99 miles | {{restaurant.delivery_time}} - {{restaurant.delivery_time+10}} mins</h2>
+                    </div>
+                  </div>
+          </div>  
+           <div ng-repeat="restaurant in restaurants" ng-If="restaurant.state && restaurant.rating===4">
+            <div ng-If="checkrating(restaurant.rating)" class="list-cat col-xs-12">
+                      <h2 > 4 </h2>  
+                    <span>&#9734;</span>
+                      <span>&#9734;</span>
+                      <span>&#9734;</span>
+                      <span>&#9734;</span>
+                               
+                  </div>
+                  <div class="resturant-list col-xs-12 col-md-4 col-xl-3">
+                    <img src="{{restaurant.banner}}" class="background-frame">
+                    <div class="detail-block">
+                      <img src="{{restaurant.logo}}">
+                      <div class="ratings">
+                     <span ng-repeat="i in getNumber(restaurant.rating)  track by $index">&#9734;</span>
+
+                      </div>
+                        <h2>{{restaurant.name}}</h2>
+                        <h2>4.99 miles | {{restaurant.delivery_time}} - {{restaurant.delivery_time+10}} mins</h2>
+                    </div>
+                  </div>
+          </div>  
+           <div ng-repeat="restaurant in restaurants" ng-If="restaurant.state && restaurant.rating===3">
+            <div class="list-cat col-xs-12">
+                         <span ng-If="checkrating(restaurant.rating)"> <h2 > 3 </h2>  
+                    <span>&#9734;</span>
+                      <span>&#9734;</span>
+                      <span>&#9734;</span>
+                      <span>&#9734;</span>  
+                      </span>          
+                  </div>
+                  <div class="resturant-list col-xs-12 col-md-4 col-xl-3">
+                    <img src="img/everest.jpg" class="background-frame">
+                    <div class="detail-block">
+                      <img src="img/everestlogo.jpg">
+                      <div class="ratings">
+                        <span>&#9734;</span>
+                        <span>&#9734;</span>
+                        <span>&#9734;</span>
+                        <span>&#9734;</span>
+                        <span>&#9734;</span>
+                      </div>
+                        <h2>{{restaurant.name}}</h2>
+                        <h2>4.99 miles | {{restaurant.delivery_time}} - {{restaurant.delivery_time+10}} mins</h2>
+                    </div>
+                  </div>
+          </div>   
+          <div ng-repeat="restaurant in restaurants" ng-If="restaurant.state && restaurant.rating===2">
+            <div class="list-cat col-xs-12">
+                         <span ng-If="checkrating(restaurant.rating)"> <h2 > 2 </h2>  
+                    <span>&#9734;</span>
+                      <span>&#9734;</span>
+                      <span>&#9734;</span>
+                      <span>&#9734;</span>  
+                      </span>          
+                  </div>
+                  <div class="resturant-list col-xs-12 col-md-4 col-xl-3">
+                    <img src="img/everest.jpg" class="background-frame">
+                    <div class="detail-block">
+                      <img src="img/everestlogo.jpg">
+                      <div class="ratings">
+                        <span>&#9734;</span>
+                        <span>&#9734;</span>
+                        <span>&#9734;</span>
+                        <span>&#9734;</span>
+                        <span>&#9734;</span>
+                      </div>
+                        <h2>{{restaurant.name}}</h2>
+                        <h2>4.99 miles | {{restaurant.delivery_time}} - {{restaurant.delivery_time+10}} mins</h2>
+                    </div>
+                  </div>
+          </div>  
+        </md-content>
+     <!--  </md-tab>
+      <md-tab label="three">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">Tab Three</h1>
+          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+        </md-content>
+      </md-tab> -->
+    </md-tabs>
+  </md-content>
+</div>
+        
+       
+
+            <!-- <div id="dishes" class="tab-pane fade ">
+             
+                <h2>Popular Dishes</h2>
+                <div class="dishes-list col-xs-12 col-md-5 col-xl-4 ">
+                  <h1>Vegetable somosa [2 pcs.]</h1>
+                  <div class="left-attr col-xs-12 col-md-6">
+                    <img src="img/samosa.jpg">
+                    <span class="price">$4.40</span>
+                  </div>
+                  <div class="right-attr col-xs-12 col-md-6">
+                     <p>Deep fried traingular pastry stuffed with mildy spiced potatoes and green peas. Served with tamrind & mint chutney.
+                     </p>
+                  </div>
+                  <div class="lower-attr col-xs-12 col-md-12">
+                    <p class="col-xs-12 col-md-6">Select spice level :</p> 
+                    <div class="spice-level col-xs-12 col-md-6"> <span class="mild">mild</span> <span class="medium">medium</span><span class="spicy">spicy</span> <input id="slider1" type="range" min="0" max="200" step="100" value="0" /></div>
+                  </div>
+                   <div class="bottom-attr col-xs-12 col-md-12">
+                      <h1>Quantity :</h1>
+                      <input type="number" name="points"
+                        min="1" max="10" step="1" value="1">
+                      <a href="#">Order Now</a>
+                    </div>
+                </div>
+
+                <div class="dishes-list col-xs-12 col-md-5 col-xl-4 col-md-offset-1">
+                  <h1>Vegetable Momo [8 pcs.] </h1>
+                  <div class="left-attr col-xs-12 col-md-6">
+                    <img src="img/momo.jpg">
+                    <span class="price">$8.99</span>
+                  </div>
+                  <div class="right-attr col-xs-12 col-md-6">
+                     <p>Steamed dumplings filled with miced cabbage, brocoli, onion & special spices. Served with tomato-sesame chutney.
+                     </p>
+                  </div>
+                  <div class="lower-attr col-xs-12 col-md-12">
+                    <p class="col-xs-12 col-md-6">Select spice level :</p> 
+                    <div class="spice-level col-xs-12 col-md-6"> <span class="mild">mild</span> <span class="medium">medium</span><span class="spicy">spicy</span> <input id="slider1" type="range" min="100" max="300" step="100" value="0" /></div>
+                   </div>
+                   <div class="bottom-attr col-xs-12 col-md-12">
+                      <h1>Quantity :</h1>
+                      <input type="number" name="points"
+                        min="1" max="10" step="1" value="1">
+                      <a href="#">Order Now</a>
+                    </div>
+                </div>
+
+                <div class="dishes-list col-xs-12 col-md-5 col-xl-4">
+                  <h1>Vegetable Pakoda [8 pcs.]</h1>
+                  <div class="left-attr col-xs-12 col-md-6">
+                    <img src="img/pakoda.jpg">
+                    <span class="price">$7.40</span>
+                  </div>
+                  <div class="right-attr col-xs-12 col-md-6">
+                     <p>Deep fried mixed vegetables with spiced batter.Served with tamarind & mint chutney.
+                     </p>
+                  </div>
+                  <div class="lower-attr col-xs-12 col-md-12">
+                    <p class="col-xs-12 col-md-6">Select spice level :</p> 
+                    <div class="spice-level col-xs-12 col-md-6"> <span class="mild">mild</span> <span class="medium">medium</span><span class="spicy">spicy</span> <input id="slider1" type="range" min="100" max="300" step="100" value="0" /></div>
+                  </div>
+                   <div class="bottom-attr col-xs-12 col-md-12">
+                      <h1>Quantity :</h1>
+                      <input type="number" name="points"
+                        min="1" max="10" step="1" value="1">
+                      <a href="#">Order Now</a>
+                    </div>
+
+                </div>
+
+                <div class="dishes-list col-xs-12 col-md-5 col-xl-4 col-md-offset-1">
+                  <h1>Vegetable somosa [2 pcs]</h1>
+                  <div class="left-attr col-xs-12 col-md-6">
+                    <img src="img/samosa.jpg">
+                    <span class="price">$4.40</span>
+                  </div>
+                  <div class="right-attr col-xs-12 col-md-6">
+                     <p>Deep fried traingular pastry stuffed with mildy spiced potatoes and green peas. Served with tamrind & mint chutney.
+                     </p>
+                  </div>
+                  <div class="lower-attr col-xs-12 col-md-12">
+                    <p class="col-xs-12 col-md-6">Select spice level :</p> 
+                    <div class="spice-level col-xs-12 col-md-6"> <span class="mild">mild</span> <span class="medium">medium</span><span class="spicy">spicy</span> <input id="slider1" type="range" min="100" max="300" step="100" value="0"  /></div>
+                   </div>
+                   <div class="bottom-attr col-xs-12 col-md-12">
+                      <h1>Quantity :</h1>
+                      <input type="number" name="points"
+                        min="1" max="10" step="1" value="1">
+                      <a href="#">Order Now</a>
+                    </div>
+                </div>
+                <div class="list-cat col-xs-12">
+                <h2>Recntly Ordered</h2> 
+                </div>
+                <div class="dishes-list col-xs-12 col-md-5 col-xl-4">
+                  <h1>Vegetable somosa [2 pcs.]</h1>
+                  <div class="left-attr col-xs-12 col-md-6">
+                    <img src="img/samosa.jpg">
+                    <span class="price">$4.40</span>
+                  </div>
+                  <div class="right-attr col-xs-12 col-md-6">
+                     <p>Deep fried traingular pastry stuffed with mildy spiced potatoes and green peas. Served with tamrind & mint chutney.
+                     </p>
+                  </div>
+                  <div class="lower-attr col-xs-12 col-md-12">
+                    <p class="col-xs-12 col-md-6">Select spice level :</p> 
+                    <div class="spice-level col-xs-12 col-md-6"> <span class="mild">mild</span> <span class="medium">medium</span><span class="spicy">spicy</span> <input id="slider1" type="range" min="0" max="200" step="100" value="0" /></div>
+                  </div>
+                   <div class="bottom-attr col-xs-12 col-md-12">
+                      <h1>Quantity :</h1>
+                      <input type="number" name="points"
+                        min="1" max="10" step="1" value="1">
+                      <a href="#">Order Now</a>
+                    </div>
+                </div>
+
+                <div class="dishes-list col-xs-12 col-md-5 col-xl-4 col-md-offset-1">
+                  <h1>Vegetable Momo [8 pcs.] </h1>
+                  <div class="left-attr col-xs-12 col-md-6">
+                    <img src="img/momo.jpg">
+                    <span class="price">$8.99</span>
+                  </div>
+                  <div class="right-attr col-xs-12 col-md-6">
+                     <p>Steamed dumplings filled with miced cabbage, brocoli, onion & special spices. Served with tomato-sesame chutney.
+                     </p>
+                  </div>
+                  <div class="lower-attr col-xs-12 col-md-12">
+                    <p class="col-xs-12 col-md-6">Select spice level :</p> 
+                    <div class="spice-level col-xs-12 col-md-6"> <span class="mild">mild</span> <span class="medium">medium</span><span class="spicy">spicy</span> <input id="slider1" type="range" min="100" max="300" step="100" value="0" /></div>
+                   </div>
+                   <div class="bottom-attr col-xs-12 col-md-12">
+                      <h1>Quantity :</h1>
+                      <input type="number" name="points"
+                        min="1" max="10" step="1" value="1">
+                      <a href="#">Order Now</a>
+                    </div>
+                </div>
+
+                <div class="dishes-list col-xs-12 col-md-5 col-xl-4">
+                  <h1>Vegetable Pakoda [8 pcs.]</h1>
+                  <div class="left-attr col-xs-12 col-md-6">
+                    <img src="img/pakoda.jpg">
+                    <span class="price">$7.40</span>
+                  </div>
+                  <div class="right-attr col-xs-12 col-md-6">
+                     <p>Deep fried mixed vegetables with spiced batter.Served with tamarind & mint chutney.
+                     </p>
+                  </div>
+                  <div class="lower-attr col-xs-12 col-md-12">
+                    <p class="col-xs-12 col-md-6">Select spice level :</p> 
+                    <div class="spice-level col-xs-12 col-md-6"> <span class="mild">mild</span> <span class="medium">medium</span><span class="spicy">spicy</span> <input id="slider1" type="range" min="100" max="300" step="100" value="0" /></div>
+                  </div>
+                   <div class="bottom-attr col-xs-12 col-md-12">
+                      <h1>Quantity :</h1>
+                      <input type="number" name="points"
+                        min="1" max="10" step="1" value="1">
+                      <a href="#">Order Now</a>
+                    </div>
+                </div>
+
+                <div class="dishes-list col-xs-12 col-md-5 col-xl-4 col-md-offset-1">
+                  <h1>Vegetable somosa [2 pcs]</h1>
+                  <div class="left-attr col-xs-12 col-md-6">
+                    <img src="img/samosa.jpg">
+                    <span class="price">$4.40</span>
+                  </div>
+                  <div class="right-attr col-xs-12 col-md-6">
+                     <p>Deep fried traingular pastry stuffed with mildy spiced potatoes and green peas. Served with tamrind & mint chutney.
+                     </p>
+                  </div>
+                  <div class="lower-attr col-xs-12 col-md-12">
+                    <p class="col-xs-12 col-md-6">Select spice level :</p> 
+                    <div class="spice-level col-xs-12 col-md-6"> <span class="mild">mild</span> <span class="medium">medium</span><span class="spicy">spicy</span> <input id="slider1" type="range" min="100" max="300" step="100" value="0"  /></div>
+                   </div>
+                   <div class="bottom-attr col-xs-12 col-md-12">
+                      <h1>Quantity :</h1>
+                      <input type="number" name="points"
+                        min="1" max="10" step="1" value="1">
+                      <a href="#">Order Now</a>
+                    </div>
+                </div>
+    		    </div> -->
+
+            
+
+    <!-- /.contianer -->
+
+
+</div><!-- propdiv -->
+
+
+
+ 
+
+  <div ng-show="propvaluecheck()"  class="anothercity">
+      
+     <div class="banner">
+            <img src="img/cover.jpg">
+            <h1>we strive to serve you with best </br>ASIAN food</br> experience.</h1>
+    </div><!-- /.banner -->
+
+
+         <div class="find-location" >
+            <label class="item-input-wrapper">
+              <i class="mail-icon"></i>
+              <input type="text" id="Autocomplete" class="form-control"  placeholder="Enter your email address" /> 
+           </label>
+            <h1>we are not in you area</br>Leave us your email address </br>we will try</br> to reach you soon.</h1>
+          </div><!-- /.find-location-->
+
+
+
+  </div>
+  </div>
+
+
+</div>
+
+
+
